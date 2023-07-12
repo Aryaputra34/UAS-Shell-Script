@@ -36,7 +36,7 @@ if [ $bool_ping -eq 0 ] && [ $bool_nginx -eq 0 ];then
     echo $suskses
     sed -i "s/isi_pesan/$sukses/" $email
     sed -i "s/isi_subjek/$subjek/" $email
-    python3 $email
+    kirim_email
 
 #hanya nginx
 elif [ $bool_nginx -eq 0 ];then
