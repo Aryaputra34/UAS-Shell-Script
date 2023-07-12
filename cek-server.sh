@@ -19,8 +19,8 @@ down="server mati, tidak bisa ping ke website dan web server down"
 subjek="Monitoring Server TIK PNJ"
 
 #path
-email="$PWD/email1.py"
-template="$PWD/template_email.py"
+email="/home/arya/shell_uas/email1.py"
+template="/home/arya/shell_uas/template_email.py"
 
 #copy isi template email
 cp template_email.py email1.py
@@ -36,7 +36,7 @@ if [ $bool_ping -eq 0 ] && [ $bool_nginx -eq 0 ];then
     echo $suskses
     sed -i "s/isi_pesan/$sukses/" $email
     sed -i "s/isi_subjek/$subjek/" $email
-    kirim_email
+    python3 $email
 
 #hanya nginx
 elif [ $bool_nginx -eq 0 ];then
@@ -65,4 +65,6 @@ fi
 
 
 #cek exit code dari ping dan status web server
-echo "bool ping = $bool_ping\nbool nginx = $bool_nginx"
+echo "bool ping = $bool_ping"
+echo "bool nginx = $bool_nginx"
+echo selesai
