@@ -21,24 +21,39 @@ down="server mati, tidak bisa ping ke website dan web server down"
 subjek="Monitoring Server TIK PNJ"
 
 #path
-email="/home/arya/shell_uas/email1.py"
-template="/home/arya/shell_uas/template_email.py"
+email="/home/zoc/Documents/Kuliah/UAS-Shell-Script/email1.py"
+template="/home/zoc/Documents/Kuliah/UAS-Shell-Script/template_email.py"
+db="/home/zoc/Documents/Kuliah/UAS-Shell-Script/db.py"
+template_db="/home/zoc/Documents/Kuliah/UAS-Shell-Script/template_db.py"
 
 #copy isi template email
 cp $template $email
+cp $template_db $db
+
 
 kirim_email()
 {
  python3 $email
 }
 
+insert_db(){
+    python3 $db
+}
+
+
 #bisa ping dan nginx
 if [ $bool_ping -eq 0 ] && [ $bool_nginx -eq 0 ];then
 
-    echo "$suskses"
+    echo "$sukses"
     sed -i "s/isi_pesan/$sukses/" $email
     sed -i "s/isi_subjek/$subjek/" $email
+    echo "Server berjalan!" >> log.log
+    query="INSERT INTO server_log VALUES(NULL,'$sukses','{formatted_time}')"
+    sed -i "s/isi_pesan/$query/" $db
+    insert_db
     kirim_email
+
+    
 
 #hanya nginx
 elif [ $bool_nginx -eq 0 ];then
@@ -46,21 +61,30 @@ elif [ $bool_nginx -eq 0 ];then
     echo "$nginx"
     sed -i "s/isi_pesan/$nginx/" $email
     sed -i "s/isi_subjek/$subjek/" $email
+    echo "Gagal Ping dan Web Server berjalan!" >> log.log
+    query="INSERT INTO server_log VALUES(NULL,'$nginx','{formatted_time}')"
+    sed -i "s/isi_pesan/$query/" $db
+    insert_db
     kirim_email
 
 #hanya ping
-elif [ $bool_ping -eq 0 ];then
+# elif [ $bool_ping -eq 0 ];then
 
-    echo "$ping"
-    sed -i "s/isi_pesan/$ping/" $email
-    sed -i "s/isi_subjek/$subjek/" $email
-    kirim_email
+#     echo "$ping"
+#     sed -i "s/isi_pesan/$ping/" $email
+#     sed -i "s/isi_subjek/$subjek/" $email
+#     echo "Berhasil Ping dan Web server tidak berjalan!" >> log.log
+#     kirim_email
 
 else
 #tidak bisa ping dan nginx
     echo "$down"
     sed -i "s/isi_pesan/$down/" $email
     sed -i "s/isi_subjek/$subjek/" $email
+    echo "Server tidak berjalan!" >> log.log
+    query="INSERT INTO server_log VALUES(NULL,'$down','{formatted_time}')"
+    sed -i "s/isi_pesan/$query/" $db
+    insert_db
     kirim_email
 
 fi
