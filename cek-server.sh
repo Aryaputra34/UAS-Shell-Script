@@ -14,17 +14,21 @@ sudo systemctl status nginx | grep "Active: active" > /dev/null 2>&1
 bool_nginx=$?
 
 #variabel isi pesan ataupun subjek
-sukses="berhasil ping dan nginx"
-nginx="berhasil nginx gagal ping"
-ping="berhasil ping gagal nginx"
-down="server mati, tidak bisa ping ke website dan web server down"
+sukses="Berhasil PING dan NGINX"
+nginx="Berhasil NGINX gagal PING"
+ping="Berhasil PING gagal NGINX"
+down="Server mati, tidak bisa PING ke website dan web server DOWN"
 subjek="Monitoring Server TIK PNJ"
 
-#path
-email="/home/arya/shell_uas/email1.py"
-template="/home/arya/shell_uas/template_email.py"
-db="/home/arya/shell_uas/db.py"
-template_db="/home/arya/shell_uas/template_db.py"
+#variabel bot telegram
+url="https://api.telegram.org/bot$TOKEN/sendMessage"
+
+
+email="/home/william/UAS/UAS-Shell-Script/email1.py"
+template="/home/william/UAS/UAS-Shell-Script/template_email.py"
+db="/home/william/UAS/UAS-Shell-Script/db.py"
+template_db="/home/william/UAS/UAS-Shell-Script/template_db.py"
+
 
 #copy isi template email
 cp $template $email
@@ -45,6 +49,10 @@ insert_db(){
 if [ $bool_ping -eq 0 ] && [ $bool_nginx -eq 0 ];then
 
     echo "$sukses"
+#mengirim pesan melalui bot telegram
+    curl -s -X POST $url -d chat_id=$CHAT_ID -d text="$sukses" > /dev/null 2>&1
+    echo "Cek Telegram untuk melihat Notifikasi!"
+#mengirim pesan melalui email
     sed -i "s/isi_pesan/$sukses/" $email
     sed -i "s/isi_subjek/$subjek/" $email
     echo "Server berjalan!" >> log.log
@@ -59,6 +67,10 @@ if [ $bool_ping -eq 0 ] && [ $bool_nginx -eq 0 ];then
 elif [ $bool_nginx -eq 0 ];then
 
     echo "$nginx"
+#mengirim pesan melalui bot telegram
+    curl -s -X POST $url -d chat_id=$CHAT_ID -d text="$nginx" > /dev/null 2>&1
+    echo "Cek Telegram untuk melihat Notifikasi!"
+#mengirim pesan melalui email
     sed -i "s/isi_pesan/$nginx/" $email
     sed -i "s/isi_subjek/$subjek/" $email
     echo "Gagal Ping dan Web Server berjalan!" >> log.log
@@ -71,6 +83,9 @@ elif [ $bool_nginx -eq 0 ];then
 # elif [ $bool_ping -eq 0 ];then
 
 #     echo "$ping"
+#mengirim pesan melalui bot telegram
+     # curl -s -X POST $url -d chat_id=$CHAT_ID -d text="$ping" > /dev/null 2>&1
+#mengirim pesan melalui email
 #     sed -i "s/isi_pesan/$ping/" $email
 #     sed -i "s/isi_subjek/$subjek/" $email
 #     echo "Berhasil Ping dan Web server tidak berjalan!" >> log.log
@@ -79,6 +94,10 @@ elif [ $bool_nginx -eq 0 ];then
 else
 #tidak bisa ping dan nginx
     echo "$down"
+#mengirim pesan melalui bot telegram
+    curl -s -X POST $url -d chat_id=$CHAT_ID -d text="$down" > /dev/null 2>&1
+    echo "Cek Telegram untuk melihat Notifikasi!"
+#mengirim pesan melalui email
     sed -i "s/isi_pesan/$down/" $email
     sed -i "s/isi_subjek/$subjek/" $email
     echo "Server tidak berjalan!" >> log.log
