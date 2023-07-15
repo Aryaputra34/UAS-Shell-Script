@@ -26,7 +26,7 @@ template_db="$(pwd)/template_db.py"
 
 #copy isi template email
 cp $template $email
-cp $template_database $db
+cp $template_db $db
 
 
 kirim_email()
