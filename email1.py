@@ -8,7 +8,7 @@ email_pengirim = os.environ['USERNAME_EMAIL']
 password = os.environ['PASSWORD_EMAIL']
 
 # Pengaturan email penerima
-email_penerima = "aryaputramaheswara34@gmail.com"
+email_penerima = os.environ['PENERIMA_EMAIL']
 
 # Membuat objek MIMEMultipart
 msg = MIMEMultipart()

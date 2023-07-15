@@ -10,6 +10,6 @@ print(formatted_time)
 
 db = getMysqlConnection()
 cur = db.cursor()
-query = f"INSERT INTO server_log VALUES(NULL,'server mati, tidak bisa ping ke website dan web server down','{formatted_time}')"
+query = f"INSERT INTO server_log VALUES(NULL,'berhasil ping dan nginx','{formatted_time}')"
 cur.execute(query)
 db.commit()

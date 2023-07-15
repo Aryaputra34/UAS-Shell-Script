@@ -21,10 +21,10 @@ down="server mati, tidak bisa ping ke website dan web server down"
 subjek="Monitoring Server TIK PNJ"
 
 #path
-email="/home/zoc/Documents/Kuliah/UAS-Shell-Script/email1.py"
-template="/home/zoc/Documents/Kuliah/UAS-Shell-Script/template_email.py"
-db="/home/zoc/Documents/Kuliah/UAS-Shell-Script/db.py"
-template_db="/home/zoc/Documents/Kuliah/UAS-Shell-Script/template_db.py"
+email="/home/arya/shell_uas/email1.py"
+template="/home/arya/shell_uas/template_email.py"
+db="/home/arya/shell_uas/db.py"
+template_db="/home/arya/shell_uas/template_db.py"
 
 #copy isi template email
 cp $template $email
