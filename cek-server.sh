@@ -20,6 +20,11 @@ ping="berhasil ping gagal nginx"
 down="server mati, tidak bisa ping ke website dan web server down"
 subjek="Monitoring Server TIK PNJ"
 
+#variabel bot telegram
+TOKEN=$"TOKEN"
+URL="https://api.telegram.org/bot$token/sendMessage"
+CHAT_ID="$CHAT_ID"
+
 #path
 email="/home/zoc/Documents/Kuliah/UAS-Shell-Script/email1.py"
 template="/home/zoc/Documents/Kuliah/UAS-Shell-Script/template_email.py"
@@ -45,6 +50,9 @@ insert_db(){
 if [ $bool_ping -eq 0 ] && [ $bool_nginx -eq 0 ];then
 
     echo "$sukses"
+#mengirim pesan melalui bot telegram
+    curl -s -X POST $url -d chat_id=$id_chat -d text="$sukses" > /dev/null 2>&1
+#mengirim pesan melalui email
     sed -i "s/isi_pesan/$sukses/" $email
     sed -i "s/isi_subjek/$subjek/" $email
     echo "Server berjalan!" >> log.log
@@ -59,6 +67,9 @@ if [ $bool_ping -eq 0 ] && [ $bool_nginx -eq 0 ];then
 elif [ $bool_nginx -eq 0 ];then
 
     echo "$nginx"
+#mengirim pesan melalui bot telegram
+    curl -s -X POST $url -d chat_id=$id_chat -d text="$nginx" > /dev/null 2>&1
+#mengirim pesan melalui email
     sed -i "s/isi_pesan/$nginx/" $email
     sed -i "s/isi_subjek/$subjek/" $email
     echo "Gagal Ping dan Web Server berjalan!" >> log.log
@@ -71,6 +82,9 @@ elif [ $bool_nginx -eq 0 ];then
 # elif [ $bool_ping -eq 0 ];then
 
 #     echo "$ping"
+#mengirim pesan melalui bot telegram
+     # curl -s -X POST $url -d chat_id=$id_chat -d text="$ping" > /dev/null 2>&1
+#mengirim pesan melalui email
 #     sed -i "s/isi_pesan/$ping/" $email
 #     sed -i "s/isi_subjek/$subjek/" $email
 #     echo "Berhasil Ping dan Web server tidak berjalan!" >> log.log
@@ -79,6 +93,9 @@ elif [ $bool_nginx -eq 0 ];then
 else
 #tidak bisa ping dan nginx
     echo "$down"
+#mengirim pesan melalui bot telegram
+    curl -s -X POST $url -d chat_id=$id_chat -d text="$down" > /dev/null 2>&1
+#mengirim pesan melalui email
     sed -i "s/isi_pesan/$down/" $email
     sed -i "s/isi_subjek/$subjek/" $email
     echo "Server tidak berjalan!" >> log.log
