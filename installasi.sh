@@ -11,7 +11,7 @@ elif [ $pilihan -eq 2 ];then
     sh setting_tele.sh
 
 elif [ $pilihan -eq 3 ];then
-    echo "installasi crontab"
+    sh penjadwalan.sh
 
 else
     echo pilih 1-3 !!
