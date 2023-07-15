@@ -15,6 +15,6 @@ formatted_time = curr_time.strftime('%Y-%m-%d %H:%M:%S')
 
 db = getMysqlConnection()
 cur = db.cursor()
-query = f"INSERT INTO server_log VALUES(NULL,'Server berjalan dengan baik dan benar','{formatted_time}')"
+query = f"INSERT INTO server_log VALUES(NULL,'Server nginx tidak berjalan','{formatted_time}')"
 cur.execute(query)
 db.commit()
