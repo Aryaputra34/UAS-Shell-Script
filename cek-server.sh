@@ -24,10 +24,10 @@ subjek="Monitoring Server TIK PNJ"
 url="https://api.telegram.org/bot$TOKEN/sendMessage"
 
 
-email="/home/william/UAS/UAS-Shell-Script/email1.py"
-template="/home/william/UAS/UAS-Shell-Script/template_email.py"
-db="/home/william/UAS/UAS-Shell-Script/db.py"
-template_db="/home/william/UAS/UAS-Shell-Script/template_db.py"
+email="$(pwd)/email1.py"
+template="$(pwd)/template_email.py"
+db="$(pwd)/db.py"
+template_db="$(pwd)/template_db.py"
 
 
 #copy isi template email
