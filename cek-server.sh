@@ -29,14 +29,27 @@ template="/home/william/UAS/UAS-Shell-Script/template_email.py"
 db="/home/william/UAS/UAS-Shell-Script/db.py"
 template_db="/home/william/UAS/UAS-Shell-Script/template_db.py"
 
+<<<<<<< Updated upstream
 
+=======
+#path
+email="/home/zoc/Documents/Kuliah/UAS-Shell-Script/email1.py"
+template="/home/zoc/Documents/Kuliah/UAS-Shell-Script/template_email.py"
+db="/home/zoc/Documents/Kuliah/UAS-Shell-Script/db.py"
+template_db="/home/zoc/Documents/Kuliah/UAS-Shell-Script/template_db.py"
+pdf="/home/zoc/Documents/Kuliah/UAS-Shell-Script/pdf1.py"
+template_pdf="/home/zoc/Documents/Kuliah/UAS-Shell-Script/template_pdf.py"
+>>>>>>> Stashed changes
 #copy isi template email
 cp $template $email
 cp $template_db $db
+cp $template_pdf $pdf
+
 
 
 kirim_email()
 {
+ python3 $pdf
  python3 $email
 }
 
@@ -44,6 +57,10 @@ insert_db(){
     python3 $db
 }
 
+sed -i "s/sukses1/$sukses/" $pdf
+sed -i "s/ping1/$ping/" $pdf
+sed -i "s/nginx1/$nginx/" $pdf
+sed -i "s/down1/$down/" $pdf
 
 #bisa ping dan nginx
 if [ $bool_ping -eq 0 ] && [ $bool_nginx -eq 0 ];then
@@ -55,6 +72,7 @@ if [ $bool_ping -eq 0 ] && [ $bool_nginx -eq 0 ];then
 #mengirim pesan melalui email
     sed -i "s/isi_pesan/$sukses/" $email
     sed -i "s/isi_subjek/$subjek/" $email
+    sed -1 "s/kondisi/$sukses/" $pdf
     echo "Server berjalan!" >> log.log
     query="INSERT INTO server_log VALUES(NULL,'$sukses','{formatted_time}')"
     sed -i "s/isi_pesan/$query/" $db
@@ -73,6 +91,7 @@ elif [ $bool_nginx -eq 0 ];then
 #mengirim pesan melalui email
     sed -i "s/isi_pesan/$nginx/" $email
     sed -i "s/isi_subjek/$subjek/" $email
+    sed -i "s/kondisi/$nginx/" $pdf
     echo "Gagal Ping dan Web Server berjalan!" >> log.log
     query="INSERT INTO server_log VALUES(NULL,'$nginx','{formatted_time}')"
     sed -i "s/isi_pesan/$query/" $db
@@ -100,6 +119,7 @@ else
 #mengirim pesan melalui email
     sed -i "s/isi_pesan/$down/" $email
     sed -i "s/isi_subjek/$subjek/" $email
+    sed -i "s/kondisi/$down/" $pdf
     echo "Server tidak berjalan!" >> log.log
     query="INSERT INTO server_log VALUES(NULL,'$down','{formatted_time}')"
     sed -i "s/isi_pesan/$query/" $db
