@@ -23,7 +23,6 @@ db="$(pwd)/db.py"
 template_db="$(pwd)/template_db.py"
 
 
-
 #copy isi template email
 cp $template $email
 cp $template_db $db
@@ -40,6 +39,7 @@ insert_db(){
 
 
 #http code 200 dan nginx running
+#error diatas 499 adalah error dari sisi server
 if [ $http_code_nginx -le 499 ] && [ $bool_nginx -eq 0 ];then
     sukses="Server berjalan dengan baik dan benar"
     echo "$sukses"
