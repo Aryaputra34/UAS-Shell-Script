@@ -1,0 +1,7 @@
+token bot =6124290050:AAHcdSyghS4GRA0ZiGR56JbM-TtUGzAYiks
+chat id =-928304232
+
+email_pengirim =johap208@gmail.com
+password =yverfoptgypucfgb"
+email_penerima =aryaputramaheswara34@gmail.com
+
