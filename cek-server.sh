@@ -23,11 +23,12 @@ subjek="Monitoring Server TIK PNJ"
 #variabel bot telegram
 url="https://api.telegram.org/bot$TOKEN/sendMessage"
 
-#path
+
 email="/home/william/UAS/UAS-Shell-Script/email1.py"
 template="/home/william/UAS/UAS-Shell-Script/template_email.py"
 db="/home/william/UAS/UAS-Shell-Script/db.py"
 template_db="/home/william/UAS/UAS-Shell-Script/template_db.py"
+
 
 #copy isi template email
 cp $template $email
