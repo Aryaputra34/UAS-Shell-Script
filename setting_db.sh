@@ -1,7 +1,7 @@
 #!/bin/bash
 
 konfigurasi()
-{   
+{
     echo ""
     echo "Konfigurasi Variabel Environment Database"
     read -p "host     : " host_db
@@ -31,7 +31,7 @@ mysql -V > /dev/null 2>&1
 
 if [ $? -eq 0 ]; then
     konfigurasi
-    
+
 else
     echo ""
     echo "MySQL belum terinstall pada sistem operasi"
