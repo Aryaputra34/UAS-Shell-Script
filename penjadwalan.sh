@@ -21,24 +21,24 @@ case $option in
 	read -p "Masukan perintah atau path file yang ingin dilankan: " command
 
 	cron_entry="$minute $hour $day $month $day_of_week $command"
-	(crontab -l ; echo "$cron_entry") | crontab -
+	(sudo crontab -l ; echo "$cron_entry") | sudo crontab -
 	echo "Jadwal tugas berhasil ditambahkan"
 	;;
 2)
 	echo "Daftar jadwal tugas:"
-	crontab -l
+	sudo crontab -l
 	echo
 	;;
 3)
 	echo "Hapus jadwal tugas yang sudah ada:"
 	# Menampilkan daftar jadwal yang sudah ada
 	 echo "Daftar jadwal tugas:"
-	crontab -l
+	sudo crontab -l
 	echo
 	read -p "Masukkan nomor baris jadwal yang ingin dihapus : " line_number
 
 	 # Menghapus jadwal pada baris yang ditentukan
-	crontab -l | sed -e "${line_number}d" | crontab -
+	sudo crontab -l | sed -e "${line_number}d" | sudo crontab -
 
 	echo "Jadwal tugas berhasil dihapus!"
 	;;
