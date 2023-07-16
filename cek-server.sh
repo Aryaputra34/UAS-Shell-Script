@@ -17,10 +17,11 @@ subjek="Monitoring Server TIK PNJ"
 #variabel bot telegram
 url="https://api.telegram.org/bot$TOKEN/sendMessage"
 
-email="$(pwd)/email1.py"
-template="$(pwd)/template_email.py"
-db="$(pwd)/db.py"
-template_db="$(pwd)/template_db.py"
+#absolute
+email="/home/arya/shell_uas/email1.py"
+template="/home/arya/shell_uas/template_email.py"
+db="/home/arya/shell_uas/db.py"
+template_database="/home/arya/shell_uas/template_db.py"
 
 
 #copy isi template email

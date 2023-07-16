@@ -17,7 +17,7 @@ msg['To'] = email_penerima
 msg['Subject'] = "Monitoring Server TIK PNJ"
 
 # Menambahkan isi email
-pesan = "Server nginx tidak berjalan"
+pesan = "Server berjalan dengan baik dan benar"
 msg.attach(MIMEText(pesan, 'plain'))
 
 # Mengirim email menggunakan server Gmail
