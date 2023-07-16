@@ -1,11 +1,11 @@
 import mysql.connector
-import os
+import subprocess
 from datetime import datetime
 
-host = os.environ['HOST_DATABASE']
-user = os.environ['USER_DATABASE']
-password = os.environ['PASSWORD_DATABASE']
-db = os.environ['NAMA_DATABASE']
+host = subprocess.check_output("awk -F= '/HOST_DATABASE/ {print $2}' note.txt", shell=True).decode('utf-8').strip()
+user = subprocess.check_output("awk -F= '/USER_DATABASE/ {print $2}' note.txt", shell=True).decode('utf-8').strip()
+password = subprocess.check_output("awk -F= '/PASSWORD_DATABASE/ {print $2}' note.txt", shell=True).decode('utf-8').strip()
+db = subprocess.check_output("awk -F= '/NAMA_DATABASE/ {print $2}' note.txt", shell=True).decode('utf-8').strip()
 
 def getMysqlConnection():
     return mysql.connector.connect(host=host, user=user, password=password, database=db)
