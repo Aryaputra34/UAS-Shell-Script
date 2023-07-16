@@ -1,35 +1,45 @@
 #!/bin/bash
-echo "Konfigurasi Database"
-read -p "host     : " host_db
-read -p "user     : " user_db
-read -p "password : " pass_db
-read -p "database : " database
 
+konfigurasi()
+{   
+    echo ""
+    echo "Konfigurasi Variabel Environment Database"
+    read -p "host     : " host_db
+    read -p "user     : " user_db
+    read -p "password : " pass_db
+    read -p "database : " database
 
-cat /etc/environment | grep DATABASE >> /dev/null
-bool=$?
+    cat note.txt | grep DATABASE >> /dev/null
+    bool=$?
 
-delete(){
- sed -i '/DATABASE/d' /etc/environment
+    if [ $bool -eq 0 ];then
+        sed -i '/DATABASE/d' note.txt
+        echo variable lama telah dihapus
+    fi
+
+    cat >> note.txt << EOF
+HOST_DATABASE = $host_db
+USER_DATABASE = $user_db
+PASSWORD_DATABASE = $pass_db
+NAMA_DATABASE = $database
+EOF
+
+    sudo ./create_db.sh
 }
 
-insert(){
-    sed -i -e '$aexport HOST_DATABASE=\"'$host_db'\"' /etc/environment
-    sed -i -e '$aexport USER_DATABASE=\"'$user_db'\"' /etc/environment
-    sed -i -e '$aexport PASSWORD_DATABASE=\"'$pass_db'\"' /etc/environment
-    sed -i -e '$aexport NAMA_DATABASE=\"'$database'\"' /etc/environment
-}
+mysql -V > /dev/null 2>&1
 
-if [ $bool -eq 0 ];then
-    delete
-    echo variable lama telah dihapus
+if [ $? -eq 0 ]; then
+    konfigurasi
+    
+else
+    echo ""
+    echo "MySQL belum terinstall pada sistem operasi"
+    echo "Melakukan instalasi MySQL"
+    sudo apt-get install mysql-server -y
+    echo ""
+    echo "Instalasi Selesai!"
+
+    echo ""
+    konfigurasi
 fi
-
-insert
-
-echo ""
-echo "--- Konfigurasi Database telah disimpan pada variabel environment"
-echo "variable HOST_DATABASE     = $host_db"
-echo "variable USER_DATABASE     = $user_db"
-echo "variable PASSWORD_DATABASE = $pass_db"
-echo "variable NAMA_DATABASE     = $database"
