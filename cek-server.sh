@@ -53,7 +53,7 @@ if [ $http_code_nginx -le 499 ] && [ $bool_nginx -eq 0 ];then
     sed -i "s/isi_pesan/$sukses/" $email
     sed -i "s/isi_subjek/$subjek/" $email
     echo "Server berjalan!" >> log.log
-    
+
     query="INSERT INTO server_log VALUES(NULL,'$sukses','{formatted_time}')"
     sed -i "s/isi_pesan/$query/" $db
 
