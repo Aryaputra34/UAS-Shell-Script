@@ -1,20 +1,22 @@
 import mysql.connector
-import os
+import subprocess
 from datetime import datetime
 
-host = os.environ['HOST_DATABASE']
-user = os.environ['USER_DATABASE']
-password = os.environ['PASSWORD_DATABASE']
-db = os.environ['NAMA_DATABASE']
+#Generate
+host = subprocess.check_output("awk -F= '/HOST_DATABASE/ {print $2}' /home/arya/shell_uas/note.txt", shell=True).decode('utf-8').strip()
+user = subprocess.check_output("awk -F= '/USER_DATABASE/ {print $2}' /home/arya/shell_uas/note.txt", shell=True).decode('utf-8').strip()
+password = subprocess.check_output("awk -F= '/PASSWORD_DATABASE/ {print $2}' /home/arya/shell_uas/note.txt", shell=True).decode('utf-8').strip()
+db2 = subprocess.check_output("awk -F= '/NAMA_DATABASE/ {print $2}' /home/arya/shell_uas/note.txt", shell=True).decode('utf-8').strip()
+
 
 def getMysqlConnection():
-    return mysql.connector.connect(host=host, user=user, password=password, database=db)
+    return mysql.connector.connect(host=host, user=user, password=password, database=db2)
 
 curr_time = datetime.now()
 formatted_time = curr_time.strftime('%Y-%m-%d %H:%M:%S')
 
 db = getMysqlConnection()
 cur = db.cursor()
-query = f"INSERT INTO server_log VALUES(NULL,'Server berjalan dengan baik dan benar','{formatted_time}')"
+query = f"INSERT INTO server_log VALUES(NULL,'Server running, tetapi terdapat error 502','{formatted_time}')"
 cur.execute(query)
 db.commit()

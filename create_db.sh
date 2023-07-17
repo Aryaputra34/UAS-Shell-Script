@@ -45,7 +45,7 @@ if [ "$lanjutkh" == "Y" ] || [ "$lanjutkh" == "y" ]; then
     CREATE_TABLE_QUERY+=" );"
 
     # Eksekusi perintah menggunakan mysql client
-    sudo mysql -u $user -p'$pass' -h $host -e "$CREATE_DATABASE_QUERY $CREATE_TABLE_QUERY"
+    sudo mysql -u $user -p -h $host -e "$CREATE_DATABASE_QUERY $CREATE_TABLE_QUERY"
 
     # Periksa apakah perintah berhasil atau tidak
     if [ $? -eq 0 ]; then

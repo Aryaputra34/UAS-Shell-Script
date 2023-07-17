@@ -5,3 +5,7 @@ email_pengirim =johap208@gmail.com
 password =yverfoptgypucfgb
 email_penerima =aryaputramaheswara34@gmail.com
 
+HOST_DATABASE = localhost
+USER_DATABASE = root
+PASSWORD_DATABASE = 
+NAMA_DATABASE = server

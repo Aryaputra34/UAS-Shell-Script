@@ -6,7 +6,7 @@ konfigurasi()
     echo "Konfigurasi Variabel Environment Database"
     read -p "host     : " host_db
     read -p "user     : " user_db
-    read -p "password : " pass_db
+    read -p "pass     : " pass
     read -p "database : " database
 
     cat note.txt | grep DATABASE >> /dev/null
@@ -20,11 +20,11 @@ konfigurasi()
     cat >> note.txt << EOF
 HOST_DATABASE = $host_db
 USER_DATABASE = $user_db
-PASSWORD_DATABASE = $pass_db
+PASSWORD_DATABASE = $pass
 NAMA_DATABASE = $database
 EOF
 
-    sudo ./create_db.sh
+     ./create_db.sh
 }
 
 mysql -V > /dev/null 2>&1
