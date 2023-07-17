@@ -6,10 +6,9 @@ pass=$(cat note.txt | awk -F= '/PASSWORD_DATABASE =/ {print $2}')
 host=$(cat note.txt | awk -F= '/HOST_DATABASE =/ {print $2}')
 nama_db=$(cat note.txt | awk -F= '/NAMA_DATABASE =/ {print $2}')
 
-echo $user $pass $host $nama_db
 
 # Nama tabel baru
-read -p "Masukkan Nama Table Baru   : " NAMA_TABLE
+read -p "Masukkan Nama Table Baru    : " NAMA_TABLE
 
 echo""
 echo "Akan dilakukan Pembuatan Database Baru dengan Nama $nama_db dan Tabel Baru $NAMA_TABLE"
