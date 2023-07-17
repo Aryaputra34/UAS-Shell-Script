@@ -4,17 +4,16 @@ konfigurasi()
 {
     echo ""
     echo "Konfigurasi Variabel Environment Database"
-    read -p "host     : " host_db
-    read -p "user     : " user_db
-    read -p "pass     : " pass
-    read -p "database : " database
+    read -p "Masukkan Host MySQL         : " host_db
+    read -p "Masukkan User MySQL         : " user_db
+    read -p "Masukkan Password MySQL     : " pass
+    read -p "Masukkan Database baru      : " database
 
     cat note.txt | grep DATABASE >> /dev/null
     bool=$?
 
     if [ $bool -eq 0 ];then
         sed -i '/DATABASE/d' note.txt
-        echo variable lama telah dihapus
     fi
 
     cat >> note.txt << EOF

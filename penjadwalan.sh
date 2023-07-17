@@ -1,6 +1,7 @@
 #!/bin/bash
 
 while true; do
+clear
 echo "Silahkan pilih opsi yang diinginkan."
 echo "1. Tambah jadwal tugas baru"
 echo "2. Lihat daftar jadwal tugas"
