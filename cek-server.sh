@@ -20,15 +20,13 @@ url="https://api.telegram.org/bot$TOKEN/sendMessage"
 #absolute
 email="/home/arya/shell_uas/email1.py"
 template="/home/arya/shell_uas/template_email.py"
-db="/home/arya/shell_uas/db.py"
-template_database="/home/arya/shell_uas/template_db.py"
 basisdata="/home/arya/shell_uas/db.py"
-template_basisdata="/home/arya/shell_uas/template_db.py"
+template_database="/home/arya/shell_uas/template_db.py"
 
 
 #copy isi template email
 cp $template $email
-cp $template_basisdata $basisdata
+cp $template_database $basisdata
 
 
 kirim_email()

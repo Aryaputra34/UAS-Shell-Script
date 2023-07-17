@@ -8,8 +8,8 @@ fi
 sed -i "/template_database=/d" cek-server.sh
 sed -i "/#absolute/a template_database=\"$PWD\/template_db.py\"" cek-server.sh
 #db
-sed -i "/db=/d" cek-server.sh
-sed -i "/#absolute/a db=\"$PWD\/db.py\"" cek-server.sh
+sed -i "/basisdata=/d" cek-server.sh
+sed -i "/#absolute/a basisdata=\"$PWD\/db.py\"" cek-server.sh
 #template
 sed -i "/template=/d" cek-server.sh
 sed -i "/#absolute/a template=\"$PWD\/template_email.py\"" cek-server.sh
