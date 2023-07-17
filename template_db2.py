@@ -8,7 +8,6 @@ user = subprocess.check_output("awk -F= '/USER_DATABASE/ {print $2}' /home/arya/
 password = subprocess.check_output("awk -F= '/PASSWORD_DATABASE/ {print $2}' /home/arya/shell_uas/note.txt", shell=True).decode('utf-8').strip()
 db2 = subprocess.check_output("awk -F= '/NAMA_DATABASE/ {print $2}' /home/arya/shell_uas/note.txt", shell=True).decode('utf-8').strip()
 
-
 def getMysqlConnection():
     return mysql.connector.connect(host=host, user=user, password=password, database=db2)
 

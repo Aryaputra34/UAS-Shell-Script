@@ -22,11 +22,13 @@ email="/home/arya/shell_uas/email1.py"
 template="/home/arya/shell_uas/template_email.py"
 db="/home/arya/shell_uas/db.py"
 template_database="/home/arya/shell_uas/template_db.py"
+basisdata="/home/arya/shell_uas/db.py"
+template_basisdata="/home/arya/shell_uas/template_db.py"
 
 
 #copy isi template email
 cp $template $email
-cp $template_db $db
+cp $template_basisdata $basisdata
 
 
 kirim_email()
@@ -34,14 +36,14 @@ kirim_email()
     python3 $email
 }
 
-insert_db(){
-    python3 $db
+insert_basisdata(){
+    python3 $basisdata
 }
 
 
 #http code 200 dan nginx running
 #error diatas 499 adalah error dari sisi server
-if [ $http_code_nginx -le 499 ] && [ $bool_nginx -eq 0 ];then
+if [ "$http_code_nginx" -le 499 ] && [ "$bool_nginx" -eq 0 ];then
     sukses="Server berjalan dengan baik dan benar"
     echo "$sukses"
 
@@ -55,9 +57,9 @@ if [ $http_code_nginx -le 499 ] && [ $bool_nginx -eq 0 ];then
     echo "Server berjalan!" >> log.log
 
     query="INSERT INTO server_log VALUES(NULL,'$sukses','{formatted_time}')"
-    sed -i "s/isi_pesan/$query/" $db
+    sed -i "s/isi_pesan/$query/" $basisdata
 
-    insert_db
+    insert_basisdata
     kirim_email
 
 #hanya nginx yang running, tetapi http code bukan 200
@@ -74,8 +76,8 @@ elif [ $bool_nginx -eq 0 ];then
     sed -i "s/isi_subjek/$subjek/" $email
     echo "Web Server berjalan! tetapi terdapat error $http_code_nginx" >> log.log
     query="INSERT INTO server_log VALUES(NULL,'$nginx','{formatted_time}')"
-    sed -i "s/isi_pesan/$query/" $db
-    insert_db
+    sed -i "s/isi_pesan/$query/" $basisdata
+    insert_basisdata
     kirim_email
 
 else
@@ -93,8 +95,8 @@ else
     echo "Server tidak berjalan!" >> log.log
 
     query="INSERT INTO server_log VALUES(NULL,'$down','{formatted_time}')"
-    sed -i "s/isi_pesan/$query/" $db
-    insert_db
+    sed -i "s/isi_pesan/$query/" $basisdata
+    insert_basisdata
     kirim_email
 
 fi
