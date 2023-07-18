@@ -26,14 +26,14 @@ case $option in
 	;;
 2)
 	echo "Daftar jadwal tugas:"
-	sudo crontab -l
+	sudo crontab -l | nl -w2 -s". "
 	echo
 	;;
 3)
 	echo "Hapus jadwal tugas yang sudah ada:"
 	# Menampilkan daftar jadwal yang sudah ada
 	 echo "Daftar jadwal tugas:"
-	sudo crontab -l
+	sudo crontab -l | nl -w2 -s". "
 	echo
 	read -p "Masukkan nomor baris jadwal yang ingin dihapus : " line_number
 
